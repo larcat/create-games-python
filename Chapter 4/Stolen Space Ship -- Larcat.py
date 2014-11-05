@@ -20,45 +20,12 @@ computer_mood = 0
 fuel_loaded = 5
 unobtanium = 15
 parsecs_back = -20
+random_event = 0
+quit_check = True
 
 # Main game loop
 while done == False:
-    
-    # Status checks with Ifs. Possible deaths.
-    if unobtanium + fuel_loaded < 5:
-        print()
-        print("You are low on unobtanium! You only have ", unobtanium + fuel_loaded, " between the reactor and your stores!")
-
-    if computer_mood > 10:
-        print()
-        print("Jimmy, the artificially intelligent Computer Co-Pilot finally snaps, wresting control of the vessel from you!")
-        print("Jimmy sends you shooting into an asteroid field... You are never heard from again.")
-        print("Game over.")
-        done = True
-    
-    if unobtanium + fuel_loaded < 1:
-        print()
-        print("You are out of fuel, adrift in the void!")
-        print("The Yuxnorians catch you, ripping into the hull of the Yacht...")
-        print("You are never heard from again.")
-        print("Game over.")
-        done = True
-    
-    if parsecs_back >= 0:
-        print("The Yuxnorians catch you, ripping into the hull of the Yacht...")
-        print("You are never heard from again.")
-        print("Game over.")
-        done = True
-        
-    if parsecs_back >= 10:
-        print("Jimmy, the artificially intelligent computer co-pilot, says 'Sensors detect the Yuxnorians closing in!")
-    
-    if total_travelled >= 100:
-        print("Famished, beaten and bruised, you arrive at Planet Awesome!")
-        print("You are heralded as a hero for thumbing your nose at the hated Yuxnorians!")
-        print("Well done! You win!")
-        done = True
-        
+              
     # User commands
     print()
     print("A. Add unobtanium to the hyper drive.")
@@ -85,9 +52,9 @@ while done == False:
             print("The artificially intelligent Co-Pilot Computer, Jimmy, is cranky.")
         elif computer_mood <= 7:
             print("The artificially intelligent Co-Pilot Computer, Jimmy, is FURIOUS*@#($&@.")
-        print("Unobtanium loaded in Hyperdrive = ", fuel_loaded)
-        print("Extra unobtanium stores = ", unobtanium)
-        print("The Yuxnorian thugs are, ", parsecs_back, "parsecs behind you in space")
+        print("Unobtanium loaded in Hyperdrive =", fuel_loaded)
+        print("Extra unobtanium stores =", unobtanium)
+        print("The Yuxnorian thugs are,", parsecs_back, "parsecs behind you in space.")
     
     # Solar cycle rest
     elif str.lower(user_command) == "d":
@@ -105,7 +72,7 @@ while done == False:
         computer_mood = computer_mood + random.randrange(1, 4)
         fuel_loaded = fuel_loaded - random.randrange(1, 4)
         print()
-        print("You zoom forward, ", parsecs_travelled, " parsecs in space.")
+        print("You zoom forward,", parsecs_travelled, "parsecs in space.")
         if computer_mood <=4:
             print("The artificially intelligent Co-Pilot Computer, Jimmy, is composed.")
         elif computer_mood <= 7:
@@ -121,7 +88,7 @@ while done == False:
         computer_mood = computer_mood + random.randrange(1, 2)
         fuel_loaded = fuel_loaded - random.randrange(1, 2)
         print()
-        print("You zoom forward, ", parsecs_travelled, " parsecs in space.")
+        print("You zoom forward,", parsecs_travelled, "parsecs in space.")
         if computer_mood <=4:
             print("The artificially intelligent Co-Pilot Computer, Jimmy, is composed.")
         elif computer_mood <= 7:
@@ -154,11 +121,100 @@ while done == False:
             print()
             print("You have no more unobtanium in storage. You have ", fuel_loaded, "in the reactor.")
             print("Jimmy, the artificially intelligent Co-Pilot Computer says 'I am not pleased. Where is the food?'")
-            print("The artificially intelligent Co-Pilot Computer, Jimmy, agitated.")              
+            print("The artificially intelligent Co-Pilot Computer, Jimmy, seems agitated.")              
+    
+    
+    # Random event generator 
+    
+    random_event = random.randrange(1, 31)
+    
+    if random_event < 2:
+        print()
+        print("You feel nervous as sensors detect another ship within hailing range. It looks to be armed and shielded.")
+        print("You are shocked as Jimmy, the artificially intelligent Computer Co-Pilot, hails the ship.")
+        print("Jimmy broadcasts: 'Hello... XPR1n99A71... I haven't seen you since.... Arcturus.")
+        print("A strangely seductive sounding binary beeping responds:")
+        print("Autonomous drones begin to ferry small packetss from the strange ship to yours.")
+        print("As you engage the hyperdrive, Jimmy the artificially intelligent Computer Co-Pilot seems to .... Sigh.")
+        print()
+        computer_mood = computer_mood - 10
+        fuel_loaded = fuel_loaded + 10
+        unobtanium = unobtanium + 10        
+        print("Your stores and reactor are full of Unobtanium! Full speed ahead!")
+        print("The artificially intelligent Co-Pilot Computer, Jimmy, seems.... Sated.")  
+        
+    # Status checks with Ifs. Possible deaths.
+    
+    if unobtanium + fuel_loaded < 5:
+        print()
+        print("You are low on unobtanium! You only have ", unobtanium + fuel_loaded, " between the reactor and your stores!")
 
+    if computer_mood > 10:
+        print()
+        print("Jimmy, the artificially intelligent Computer Co-Pilot finally snaps, wresting control of the vessel from you!")
+        print("Jimmy sends you shooting into an asteroid field... You are never heard from again.")
+        print("Game over.")
+        done = True
+    
+    if unobtanium + fuel_loaded < 1:
+        print()
+        print("You are out of fuel, adrift in the void!")
+        print("The Yuxnorians catch you, ripping into the hull of the Yacht...")
+        print("You are never heard from again.")
+        print("Game over.")
+        done = True
+    
+    if parsecs_back >= 0:
+        print()        
+        print("The Yuxnorians catch you, ripping into the hull of the Yacht...")
+        print("You are never heard from again.")
+        print("Game over.")
+        done = True
+        
+    if parsecs_back >= 10:
+        print("Jimmy, the artificially intelligent computer co-pilot, says 'Sensors detect the Yuxnorians closing in!")
+    
+    if total_travelled >= 200:
+        print()
+        print("Famished, beaten and bruised, you arrive at Planet Awesome!")
+        print("You are heralded as a hero for thumbing your nose at the hated Yuxnorians!")
+        print("Well done! You win!")
+        done = True    
+    
+    # Check for quit or not
+        
+    if done == True:
+        print()
+        print("Do you want to quit?: ")
+        print("A. Quit")
+        print("B. Play again.")
+        done_check = input("What is your choice?: ")
+        
+        while str.lower(done_check) != "a" and str.lower(done_check) != "b":
+            print()
+            done_check = input("You didnt enter A' or 'B'. Please choose again.")
             
-        
-        
+        if str.lower(done_check) == "a":
+            print()
+            print("Thanks for playing! Jimmy will miss you.")            
+            done = True
+            
+        elif str.lower(done_check) == "b":
+            print()
+            print("Welcome to Space Ship Thief!")            
+            done = False
+            user_command = " "
+            parsecs_travelled = 0
+            total_travelled = 0
+            computer_mood = 0
+            fuel_loaded = 5
+            unobtanium = 15
+            parsecs_back = -20
+            random_event = 0
+            quit_check = True            
+
+
+         
     
               
     
